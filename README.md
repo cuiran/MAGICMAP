@@ -17,8 +17,8 @@ This R package can be installed using the devtools package:
 
 It depends on:
 
-* SCOUTJOY
-* yorktools
+* [SCOUTJOY](https://github.com/aelliott08/SCOUTJOY)
+* [yorktools](https://github.com/rkwalters/yorktools)
 * mvtnorm
 * Ckmeans.1d.dp
 
@@ -31,7 +31,7 @@ For lead variants from GWAS of the target phenotype:
 * GWAS effect sizes (betas) and corresponding standard errors for the target trait
 * GWAS effect sizes (betas) and corresponding standard errors for the comparator trait
 
-From LD Score regression analysis of genetic correlation between the two GWAS:
+From [LD Score regression](https://github.com/bulik/ldsc) analysis of genetic correlation between the two GWAS:
 
 * Covariance intercept (`gcov_int`)
 * Intercepts for GWAS of the target and comparator traits
