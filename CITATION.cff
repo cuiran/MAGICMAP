@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: "MAGICMAP: Mixtures Aggregating Genes Into Coordinated Modules And Pathways"
+message: "If you use this software, please cite it as below."
+version: 0.0.3
+type: software
+authors:
+  - given-names: Amanda
+    family-names: Elliott
+  - given-names: Ran
+    family-names: Cui
+  - given-names: Pradeep
+    family-names: Natarajan
+  - given-names: Jordan
+    family-names: Smoller
+  - given-names: Benjamin
+    family-names: Neale
+  - given-names: Mark
+    family-names: Daly
+  - given-names: Patrick
+    family-names: Ellinor
+  - given-names: Patrick
+    family-names: Turley
+  - given-names: Raymond
+    family-names: Walters
+doi: "10.5281/zenodo.17566967"
+url: "https://github.com/rkwalters/MAGICMAP"

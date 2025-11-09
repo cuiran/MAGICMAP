@@ -2,12 +2,13 @@
 
 Mixtures Aggregating Genes Into Coordinated Modules And Pathways 
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17566967.svg)](https://doi.org/10.5281/zenodo.17566967)
 
 ## Description
 
 MAGICMAP is designed to compare genetic effect sizes (with standard errors) of lead variants from a GWAS of a target trait to GWAS of a comparitor trait to identify distinct genetic components. This is done by fitting a regression mixture model where each component is a York regression with the intercept fixed to zero. The York regression accounts for uncertainty in the effect sizes, including potentially correlated sampling error (e.g. due to sample overlap between the two GWAS). Correlated sampling error can be estimated based on LD Score regression.
 
-Details of the model are provided in the vignette.
+Details of the model are provided in the [vignette](/vignettes/MAGICMAP_model_description.pdf).
 
 ## Installation
 
@@ -73,6 +74,3 @@ where `k` specifies the number of mixture components to consider, and `gcov_int`
 The best fit model can be visualized by running `plot.magicmap()` on the output from the `magicmap()` function. See the documentation for details on customizing the plot.
 
 
-## Citation
-
-TBD
