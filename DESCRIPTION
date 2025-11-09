@@ -1,0 +1,24 @@
+Package: MAGICMAP
+Title: MAGICMAP: Mixtures Aggregating Genes Into Coordinated Modules And Pathways
+Version: 0.0.2
+Authors@R: c(
+    person("Amanda", "Elliott", email = "aelliott@broadinstitute.org", role = c("aut")), 
+    person("Raymond", "Walters", email = "rwalters@broadinstitute.org", role = c("aut", "cre"))
+    )
+Description: Compare genetic effect sizes (with standard errors) 
+    from two studies to identify distinct genetic components. 
+    Allows sample overlap with estimation of residual correlation 
+    from LD Score regression.
+Imports:
+    mvtnorm,
+    Ckmeans.1d.dp,
+    SCOUTJOY,
+    yorktools
+Remotes:
+    github::aelliott08/SCOUTJOY,
+    github::rkwalters/yorktools
+Suggests: R.rsp
+VignetteBuilder: R.rsp
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
