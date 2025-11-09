@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: "MAGICMAP: Mixtures Aggregating Genes Into Coordinated Modules And Pathways"
 message: "If you use this software, please cite it as below."
-version: 0.0.3
+version: 0.1.0
 type: software
 authors:
   - given-names: Amanda
