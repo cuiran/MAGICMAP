@@ -202,15 +202,20 @@ magicmap_1k <- function(data, re, k, estimator="MLE", maxIterations=1000, EMTole
   
   notes <- ""
   
-  if(any(abs(diff(b_est,lag=1)) < 1e-5)){
+  if(any(abs(diff(b_est,lag=1)) < 0.01)){
     warning(paste("Slopes appear collapsed to fewer than ",k,"components"))
     notes <- paste0(notes, "Slopes not well differentiated; ")
+    em_converge <- NA
   }
   if(!is.na(em_dec)){
     notes <- paste0(notes, paste0("EM LL decreased ",signif(em_dec,4),"; "))
   }
   if(!is.na(york_dec)){
     notes <- paste0(notes, paste0("Inner LL decreased, max step ",signif(york_dec,4),"; "))
+  }
+  if(ll_comp == -Inf){
+    em_converge <- NA
+    notes <- paste0(notes, paste0("LL not finite; "))
   }
   
   
@@ -229,12 +234,13 @@ magicmap_1k <- function(data, re, k, estimator="MLE", maxIterations=1000, EMTole
     posteriors = posteriors
   )
   
-  if(!em_converge){
+  if(!is.na(em_converge) && !em_converge){
     warning(paste("EM algorithm for",k,"components failed to converge in",iter,"iterations"))
   }
   
   if(empty_comp){
     warning(paste("EM algorithm for",k,"components encountered empty component"))
+    em_converge <- FALSE
     
     if(notes==""){
       notes <- paste("EM halted due to empty component")
@@ -421,11 +427,13 @@ magicmap <- function(data, betaTargetX, sdTargetX, betaComparatorY, sdComparator
   priors <- list()
   xpreds <- list()
   posts <- list()
+  stop_k_too_high <- F
+  
   for(i in seq_along(k)){
     if(verbose){
       print(paste0("Testing k = ",k[i],"...")) 
     }
-    
+
     mod <- magicmap_1k(data=data, 
                        re=re, 
                        k=k[i], 
@@ -441,11 +449,18 @@ magicmap <- function(data, betaTargetX, sdTargetX, betaComparatorY, sdComparator
     xpreds[[i]] <- mod$predicted_target_betas
     posts[[i]] <- mod$posteriors
     
+    if(any(grepl("Slopes not well differentiated",mod$fit_stats$notes))){
+      stop_k_too_high <- T
+      if(i < length(k)){
+        k <- k[1:i]
+        warning(paste0("Components collapsed at k=",k[i],"; skipping remaining k values"))
+      }
+      break
+    }
+    
         
   }
-  
-  fit_stats = as.data.frame(t(sapply(1:length(k), function(a) fits[[a]])))
-  
+
   names(priors) <- paste0("mix",k,"components")
   names(slopes) <- paste0("mix",k,"components")
   names(xpreds) <- paste0("mix",k,"components")
