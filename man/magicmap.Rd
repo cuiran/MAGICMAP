@@ -70,9 +70,9 @@ A list of class 'magicmap' containing:
     \itemize{
       \item \code{logLik}: log of the complete data (marginal) likelihood
       \item \code{model_df}: the number of free paramters in the model, excluding nuisance parameters
-      \item \code{BIC}: Bayesian information criterion. Lower values indicate a better combination of fit and complexity.
-      \item \code{AIC}: Akaike information criterion. Lower values indicate a better combination of fit and complexity.
-      \item \code{converged}: boolean indicator of whether the model fitting converged
+      \item \code{BIC}: Bayesian information criterion; lower values indicate a better combination of fit and complexity
+      \item \code{AIC}: Akaike information criterion; lower values indicate a better combination of fit and complexity
+      \item \code{converged}: boolean indicator of whether the model fitting converged; set to NA if fitting encountered issues other than convergence (see notes field)
       \item \code{notes}: text description of additional considerations
       \item \code{iter}: number of EM iterations required for model convergence
     }

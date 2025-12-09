@@ -342,9 +342,9 @@ magicmap_1k <- function(data, re, k, estimator="MLE", maxIterations=1000, EMTole
 #'     \itemize{
 #'       \item \code{logLik}: log of the complete data (marginal) likelihood
 #'       \item \code{model_df}: the number of free paramters in the model, excluding nuisance parameters
-#'       \item \code{BIC}: Bayesian information criterion. Lower values indicate a better combination of fit and complexity.
-#'       \item \code{AIC}: Akaike information criterion. Lower values indicate a better combination of fit and complexity.
-#'       \item \code{converged}: boolean indicator of whether the model fitting converged
+#'       \item \code{BIC}: Bayesian information criterion; lower values indicate a better combination of fit and complexity
+#'       \item \code{AIC}: Akaike information criterion; lower values indicate a better combination of fit and complexity
+#'       \item \code{converged}: boolean indicator of whether the model fitting converged; set to NA if fitting encountered issues other than convergence (see notes field)
 #'       \item \code{notes}: text description of additional considerations
 #'       \item \code{iter}: number of EM iterations required for model convergence
 #'     }
@@ -535,7 +535,7 @@ plot.magicmap <- function(model, which_plot=NULL, class_thresh=0.95, label_comp=
   
   if(nrow(model$fit_stats)==1){
     
-    if(!model$fit_stats$converged){
+    if(is.na(model$fit_stats$converged) | !model$fit_stats$converged){
       warning("plotted model failed to converge")
     }
     
@@ -575,10 +575,12 @@ plot.magicmap <- function(model, which_plot=NULL, class_thresh=0.95, label_comp=
       which_plot <- which.min(model$fit_stats$BIC)
     }
     
-    if(!model$fit_stats$converged[which_plot]){
-      warning("plotted model failed to converge")
-    }else if(any(!model$fit_stats$converged)){
-      warning("plotted model converged, but some comparison models did not")
+    if(is.na(model$fit_stats$converged[which_plot])){
+      warning("model selected for plotting had issues with fitting; check notes in fit_stats table")
+    }else if(!model$fit_stats$converged[which_plot]){
+      warning("model selected for plotting failed to converge")
+    }else if(any(is.na(model$fit_stats$converged)) | any(!model$fit_stats$converged) ){
+      warning("model selected for plotting was fit successfully, but some comparison models did not")
     }
     
     k <- model$fit_stats$k[which_plot]
@@ -785,7 +787,7 @@ plot.magicmap <- function(model, which_plot=NULL, class_thresh=0.95, label_comp=
 # setwd("~/Documents/Code/github/MAGICMAP")
 # devtools::document()
 # devtools::build(manual=T)
-# install.packages("~/Documents/Code/github/MAGICMAP_0.0.2.tar.gz")
+# install.packages("~/Documents/Code/github/MAGICMAP_0.1.1.1.tar.gz")
 # require(MAGICMAP)
 # mm <- MAGICMAP::magicmap(dat, "x","sx","y","sy",k=1:3,estimator="MLE")
 # mm <- MAGICMAP::magicmap(data.frame(x=x_obs,y=y,sx=x_se,sy=x_se), "x","sx","y","sy",k=1:3, estimator="MLE")
