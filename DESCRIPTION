@@ -14,7 +14,11 @@ Imports:
     mvtnorm,
     Ckmeans.1d.dp,
     SCOUTJOY,
-    yorktools
+    yorktools,
+    SQUAREM,
+    goftest,
+    magrittr,
+    dplyr
 Remotes:
     github::aelliott08/SCOUTJOY,
     github::rkwalters/yorktools
