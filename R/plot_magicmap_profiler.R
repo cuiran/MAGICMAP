@@ -9,7 +9,7 @@
 #'
 #' @export
 
-generate_profiler_plot <- function(model, prefix) {
+generate_profiler_plot <- function(model, prefix, gene_label = TRUE) {
   
   # =========================================================================
   # 1. MODEL SELECTION & VALIDATION
@@ -212,7 +212,12 @@ generate_profiler_plot <- function(model, prefix) {
   leg_txt_size <- ifelse(total_legend_items > 6, 0.65, 0.8)
   leg_font <- ifelse(total_legend_items > 6, 1, 2) 
 
-  plot(model, colors = magic_colors, mgp = c(3.5, 1, 0), mar = c(4.5, 5.5, 3, 16), label_comp = seq_len(n_fitted_comp), legend = FALSE)
+  if (gene_label == TRUE){
+      gene_label_name = seq_len(n_fitted_comp)
+  } else {
+      gene_label_name = NULL
+  }
+  plot(model, colors = magic_colors, mgp = c(3.5, 1, 0), mar = c(4.5, 5.5, 3, 16), label_comp = gene_label_name, legend = FALSE)
   
   par(xpd = NA) 
   usr <- par("usr"); xmin=usr[1]; xmax=usr[2]; ymin=usr[3]; ymax=usr[4]
